@@ -695,8 +695,36 @@ Other Style Guides
     }
     ```
 
-  <a name="functions--default-side-effects"></a><a name="7.8"></a>
-  - [7.8](#functions--default-side-effects) Avoid side effects with default parameters.
+<a name="functions--external-side-effects"></a><a name="7.8"></a>
+  - [7.8](#functions--default-side-effects) Avoid side effects on objects outside the functions.
+
+    > Why? It breaks testability becuase it's harder to mock input data and adds complexity to the debugging because not everything happens inside the function.
+
+    ```javascript
+    // bad
+    var asset = {
+        title: 'The Avengers',
+        year: 2015
+    }
+    
+    function updateAvenger() {
+        asset.title = 'The Avengers 2';
+    }
+    
+    // good
+    var asset = {
+        title: 'The Avengers',
+        year: 2015
+    }
+    
+    function updateAvenger(movie) {
+        movie.title = 'The Avengers 2';
+        return movie;
+    }
+    ```
+
+  <a name="functions--default-side-effects"></a><a name="7.9"></a>
+  - [7.9](#functions--default-side-effects) Avoid side effects with default parameters.
 
     > Why? They are confusing to reason about.
 
@@ -712,8 +740,8 @@ Other Style Guides
     count();  // 3
     ```
 
-  <a name="functions--defaults-last"></a><a name="7.9"></a>
-  - [7.9](#functions--defaults-last) Always put default parameters last.
+  <a name="functions--defaults-last"></a><a name="7.10"></a>
+  - [7.10](#functions--defaults-last) Always put default parameters last.
 
     ```javascript
     // bad
@@ -727,8 +755,8 @@ Other Style Guides
     }
     ```
 
-  <a name="functions--constructor"></a><a name="7.10"></a>
-  - [7.10](#functions--constructor) Never use the Function constructor to create a new function. eslint: [`no-new-func`](http://eslint.org/docs/rules/no-new-func)
+  <a name="functions--constructor"></a><a name="7.11"></a>
+  - [7.11](#functions--constructor) Never use the Function constructor to create a new function. eslint: [`no-new-func`](http://eslint.org/docs/rules/no-new-func)
 
     > Why? Creating a function in this way evaluates a string similarly to eval(), which opens vulnerabilities.
 
@@ -740,8 +768,8 @@ Other Style Guides
     var subtract = Function('a', 'b', 'return a - b');
     ```
 
-  <a name="functions--signature-spacing"></a><a name="7.11"></a>
-  - [7.11](#functions--signature-spacing) Spacing in a function signature. eslint: [`space-before-function-paren`](http://eslint.org/docs/rules/space-before-function-paren) [`space-before-blocks`](http://eslint.org/docs/rules/space-before-blocks)
+  <a name="functions--signature-spacing"></a><a name="7.12"></a>
+  - [7.12](#functions--signature-spacing) Spacing in a function signature. eslint: [`space-before-function-paren`](http://eslint.org/docs/rules/space-before-function-paren) [`space-before-blocks`](http://eslint.org/docs/rules/space-before-blocks)
 
     > Why? Consistency is good, and you shouldn’t have to add or remove a space when adding or removing a name.
 
@@ -756,8 +784,8 @@ Other Style Guides
     const y = function a() {};
     ```
 
-  <a name="functions--mutate-params"></a><a name="7.12"></a>
-  - [7.12](#functions--mutate-params) Never mutate parameters. eslint: [`no-param-reassign`](http://eslint.org/docs/rules/no-param-reassign.html)
+  <a name="functions--mutate-params"></a><a name="7.13"></a>
+  - [7.13](#functions--mutate-params) Never mutate parameters. eslint: [`no-param-reassign`](http://eslint.org/docs/rules/no-param-reassign.html)
 
     > Why? Manipulating objects passed in as parameters can cause unwanted variable side effects in the original caller.
 
@@ -773,8 +801,8 @@ Other Style Guides
     }
     ```
 
-  <a name="functions--reassign-params"></a><a name="7.13"></a>
-  - [7.13](#functions--reassign-params) Never reassign parameters. eslint: [`no-param-reassign`](http://eslint.org/docs/rules/no-param-reassign.html)
+  <a name="functions--reassign-params"></a><a name="7.14"></a>
+  - [7.14](#functions--reassign-params) Never reassign parameters. eslint: [`no-param-reassign`](http://eslint.org/docs/rules/no-param-reassign.html)
 
     > Why? Reassigning parameters can lead to unexpected behavior, especially when accessing the `arguments` object. It can also cause optimization issues, especially in V8.
 
@@ -801,8 +829,8 @@ Other Style Guides
     }
     ```
 
-  <a name="functions--spread-vs-apply"></a><a name="7.14"></a>
-  - [7.14](#functions--spread-vs-apply) Prefer the use of the spread operator `...` to call variadic functions. eslint: [`prefer-spread`](http://eslint.org/docs/rules/prefer-spread)
+  <a name="functions--spread-vs-apply"></a><a name="7.15"></a>
+  - [7.15](#functions--spread-vs-apply) Prefer the use of the spread operator `...` to call variadic functions. eslint: [`prefer-spread`](http://eslint.org/docs/rules/prefer-spread)
 
     > Why? It's cleaner, you don't need to supply a context, and you can not easily compose `new` with `apply`.
 
@@ -823,7 +851,7 @@ Other Style Guides
     ```
 
   <a name="functions--signature-invocation-indentation"></a>
-  - [7.15](#functions--signature-invocation-indentation) Functions with multiline signatures, or invocations, should be indented just like every other multiline list in this guide: with each item on a line by itself, with a trailing comma on the last item.
+  - [7.16](#functions--signature-invocation-indentation) Functions with multiline signatures, or invocations, should be indented just like every other multiline list in this guide: with each item on a line by itself, with a trailing comma on the last item.
 
     ```javascript
     // bad
@@ -853,6 +881,21 @@ Other Style Guides
       bar,
       baz,
     );
+    ```
+    
+  <a name="functions--config-object-parameters"></a>
+  - [7.16](#functions--config-object-parameters) Functions having several parameters should be declared with just one object which can hold all the parameters instead of creating a long list of parameters in the function definition. This helps maintaining the function untouched if the configuration needs to be extended and it also allows having optional parameters.
+
+    ```javascript
+    // bad
+    function showModal (title, message, acceptText, cancelText, xPosition, yPosition, height, width) {
+        ...
+    }
+    
+    // good
+    function showModal (modalConfiguration) {
+        // Expect all properties needed to come inside modalConfiguration
+    }
     ```
 
 **[⬆ back to top](#table-of-contents)**
