@@ -504,8 +504,7 @@ Other Style Guides
     ```
 
   <a name="strings--line-length"></a><a name="6.2"></a>
-  - [6.2](#strings--line-length) Strings that cause the line to go over 100 characters should not be written across multiple lines using string concatenation. Prefer template literals instead.
-
+  - [6.2](#strings--line-length) Strings that cause the line to go over 100 characters should not be written across multiple lines using string concatenation. Prefer [`template literals`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals) instead.
     > Why? Broken strings are painful to work with and make code less searchable.
 
     ```javascript
