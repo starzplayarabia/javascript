@@ -2409,11 +2409,18 @@ Other Style Guides
       , aTime
     ];
 
-    // good
+    // bad
     const story = [
       once,
       upon,
       aTime,
+    ];
+    
+    // good
+    const story = [
+      once,
+      upon,
+      aTime
     ];
 
     // bad
@@ -2429,17 +2436,17 @@ Other Style Guides
       firstName: 'Ada',
       lastName: 'Lovelace',
       birthYear: 1815,
-      superPower: 'computers',
+      superPower: 'computers'
     };
     ```
 
   <a name="commas--dangling"></a><a name="19.2"></a>
-  - [19.2](#commas--dangling) Additional trailing comma: **Yup.** eslint: [`comma-dangle`](http://eslint.org/docs/rules/comma-dangle.html) jscs: [`requireTrailingComma`](http://jscs.info/rule/requireTrailingComma)
+  - [19.2](#commas--dangling) Additional trailing comma: **Nope.** eslint: [`comma-dangle`](http://eslint.org/docs/rules/comma-dangle.html) jscs: [`requireTrailingComma`](http://jscs.info/rule/requireTrailingComma)
 
-    > Why? This leads to cleaner git diffs. Also, transpilers like Babel will remove the additional trailing comma in the transpiled code which means you don't have to worry about the [trailing comma problem](https://github.com/airbnb/javascript/blob/es5-deprecated/es5/README.md#commas) in legacy browsers.
+    > Why? Unless it could lead to cleaner git diffs and transpilers like Babel will remove the additional trailing comma in the transpiled code which means you don't have to worry about the [trailing comma problem](https://github.com/airbnb/javascript/blob/es5-deprecated/es5/README.md#commas) in legacy browsers, we think that broking essential rules of the language is not healthy for the code.
 
     ```diff
-    // bad - git diff without trailing comma
+    // good - git diff without trailing comma
     const hero = {
          firstName: 'Florence',
     -    lastName: 'Nightingale'
@@ -2447,7 +2454,7 @@ Other Style Guides
     +    inventorOf: ['coxcomb chart', 'modern nursing']
     };
 
-    // good - git diff with trailing comma
+    // bad - git diff with trailing comma
     const hero = {
          firstName: 'Florence',
          lastName: 'Nightingale',
@@ -2456,7 +2463,7 @@ Other Style Guides
     ```
 
     ```javascript
-    // bad
+    // good
     const hero = {
       firstName: 'Dana',
       lastName: 'Scully'
@@ -2467,7 +2474,7 @@ Other Style Guides
       'Superman'
     ];
 
-    // good
+    // bad
     const hero = {
       firstName: 'Dana',
       lastName: 'Scully',
@@ -2478,7 +2485,7 @@ Other Style Guides
       'Superman',
     ];
 
-    // bad
+    // good
     function createHero(
       firstName,
       lastName,
@@ -2487,7 +2494,7 @@ Other Style Guides
       // does nothing
     }
 
-    // good
+    // bad
     function createHero(
       firstName,
       lastName,
@@ -2496,7 +2503,7 @@ Other Style Guides
       // does nothing
     }
 
-    // good (note that a comma must not appear after a "rest" element)
+    // good (note that a comma must not appear after a "rest" element, so you would need to add it just once if we wanted to support trailing commas, something that leads to errors)
     function createHero(
       firstName,
       lastName,
@@ -2506,14 +2513,14 @@ Other Style Guides
       // does nothing
     }
 
-    // bad
+    // good
     createHero(
       firstName,
       lastName,
       inventorOf
     );
 
-    // good
+    // bad
     createHero(
       firstName,
       lastName,
