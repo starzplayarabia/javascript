@@ -884,7 +884,7 @@ Other Style Guides
     ```
     
   <a name="functions--config-object-parameters"></a>
-  - [7.16](#functions--config-object-parameters) Functions having several parameters should be declared with just one object which can hold all the parameters instead of creating a long list of parameters in the function definition. This helps maintaining the function untouched if the configuration needs to be extended and it also allows having optional parameters.
+  - [7.17](#functions--config-object-parameters) Functions having several parameters should be declared with just one object which can hold all the parameters instead of creating a long list of parameters in the function definition. This helps maintaining the function untouched if the configuration needs to be extended and it also allows having optional parameters.
 
     ```javascript
     // bad
