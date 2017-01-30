@@ -1,4 +1,4 @@
-# Airbnb JavaScript Style Guide() {
+# STARZPLAY JavaScript Style Guide() /* Based on AirBnB's */{
 
 *A mostly reasonable approach to JavaScript*
 
@@ -504,7 +504,7 @@ Other Style Guides
     ```
 
   <a name="strings--line-length"></a><a name="6.2"></a>
-  - [6.2](#strings--line-length) Strings that cause the line to go over 100 characters should not be written across multiple lines using string concatenation.
+  - [6.2](#strings--line-length) Strings that cause the line to go over 100 characters should not be written across multiple lines using string concatenation. Prefer template literals instead.
 
     > Why? Broken strings are painful to work with and make code less searchable.
 
@@ -520,8 +520,14 @@ Other Style Guides
       'of Batman. When you stop to think about how Batman had anything to do ' +
       'with this, you would get nowhere fast.';
 
-    // good
+    // bad
     const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+    
+    // good
+    const errorMessage = `This is a super long error that was thrown because 
+    of Batman. When you stop to think about how Batman had anything to do 
+    with this, you would get nowhere 
+    fast.`;
     ```
 
   <a name="es6-template-literals"></a><a name="6.4"></a>
